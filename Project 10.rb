@@ -56,7 +56,7 @@ a.scan(/\d+/) {|o| puts o}
 # <div class=”price”>Price: $25</div> #should return 25 (not $25)
 
 # C:\Users\Sedinirina>irb --simple-prompt
-b = "<div class=”price”>Price: $25</div>"
+b = "<div class='price'>Price: $25</div>"
 # => "<div class=”price”>Price: $25</div>"
 b.scan(/\d+/) {|y| puts y}
 # 25 # it returns 25 (not $25)
@@ -81,20 +81,23 @@ b.scan(/\d+/) {|y| puts y}
 
 
 # C:\Users\Sedinirina>irb --simple-prompt
-c = "<html>
-  <body>
-<me I try to fool people by typing it out like this: steve at gmail.com
-  </body>
+a = "<html>
+   <body>
+     Hello my name is Steve, my email address is steve@capshare.com .
+     I used to have an email address that was steve@hotmail.com
+     but it was also taken. Sometime I try to fool people by typing
+     it out like this: steve at gmail.com
+   </body>
 </html>"
 # => "<html>\n  <body>\n    Hello my name is Steve, my email address is steve@caps
 # hare.com . I used to have an email address that was steve@hotmail.com but it was
 #  also taken. Sometime I try to fool people by typing it out like this: steve at
 # gmail.com\n  </body>\n</html>"
-c.gsub!(" at ", "@")
+a.gsub!(" at ", "@")
 # => "<html>\n  <body>\n    Hello my name is Steve, my email address is steve@caps
 # hare.com . I used to have an email address that was steve@hotmail.com but it was
 #  also taken. Sometime I try to fool people by typing it out like this: steve@gma
 # il.com\n  </body>\n</html>"
-c.scan(/steve@hotmail.com|steve@capshare.com|steve@gmail.com/)
+a.scan(/\w+\@\w+\.\w+\b/)
 # => ["steve@capshare.com", "steve@hotmail.com", "steve@gmail.com"]
 # >>
